@@ -1,0 +1,13 @@
+diff --git a/vendor/magento/module-require-js/Block/Html/Head/Config.php b/vendor/magento/module-require-js/Block/Html/Head/Config.php
+--- a/vendor/magento/module-require-js/Block/Html/Head/Config.php	(date 1613374030628)
++++ b/vendor/magento/module-require-js/Block/Html/Head/Config.php	(date 1613374030628)
+
+@@ -133,7 +133,7 @@ protected function _prepareLayout()
+    $assetCollection->insert(
+            $requireJsMixinsConfig->getFilePath(),
+            $requireJsMixinsConfig,
+-            $after
++            $requireJsConfig->getFilePath()
+        );
+        return parent::_prepareLayout();
+    }

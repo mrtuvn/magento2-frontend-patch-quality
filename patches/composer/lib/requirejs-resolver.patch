@@ -1,0 +1,11 @@
+diff --git a/lib/web/mage/requirejs/resolver.js b/lib/web/mage/requirejs/resolver.js
+
+--- a/lib/web/mage/requirejs/resolver.js	(date 1613374030628)
++++ b/lib/web/mage/requirejs/resolver.js	(date 1613374030628)
+
+@@ -34,7 +34,7 @@ define([
+
+    function isRejected(module) {
+-        return registry[module.id] && (registry[module.id].inited || registry[module.id].error);
++        return registry[module.id] && (registry[module.id].inited || registry[module.id].error || (registry[module.name] && registry[module.name].inited));
+    }

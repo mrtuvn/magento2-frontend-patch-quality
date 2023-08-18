@@ -1,0 +1,32 @@
+diff --git a/lib/web/mage/requirejs/mixins.js b/lib/web/mage/requirejs/mixins.js
+
+--- a/lib/web/mage/requirejs/mixins.js	(date 1613374030628)
++++ b/lib/web/mage/requirejs/mixins.js	(date 1613374030628)
+
+@@ -10,7 +10,8 @@ define('mixins', [
+
+-        unbundledContext = require.s.newContext('$'),
++        unbundledContextName = '$',
++        unbundledContext = contexts[unbundledContextName] = require.s.newContext(unbundledContextName),
+
+@@ -205,7 +206,10 @@ require([
+
+        defContextName = '_',
+        defContext = contexts[defContextName],
++        unbundledContextName = '$',
++        unbundledContext = contexts[unbundledContextName],
+        originalContextRequire = defContext.require,
++        originalContextConfigure = defContext.configure,
+        processNames = mixins.processNames;
+
+@@ -219,6 +223,15 @@ require([
+
++    /**
++     * Wrap original context configuration to update unbundled context,
++     * that way it is able to respect any changes done after mixins module has initialized.
++     */
++    defContext.configure = function(cfg) {
++        originalContextConfigure(cfg);
++        unbundledContext.configure(cfg);
++    };
++    
